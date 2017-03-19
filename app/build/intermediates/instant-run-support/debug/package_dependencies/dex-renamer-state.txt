@@ -1,0 +1,22 @@
+#Sat Mar 18 18:33:32 EDT 2017
+renamed.6=classes.dex
+renamed.5=classes7.dex
+renamed.4=classes4.dex
+renamed.3=classes3.dex
+renamed.2=classes2.dex
+renamed.1=classes5.dex
+renamed.0=classes6.dex
+base.6=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_055ecd70fc7136cc18d213fd1a94c566cd77ea8b
+base.5=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.1.0_f497afc5c202c1c94718a00e83cca233b80ce963
+base.4=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8c62008881317a243fc8447681d6baadae07a2a8
+base.3=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5cda84118e360f4637f4eb6ca92565a65adc9123
+base.2=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_52d700497c34ff216f9d0eadc5c4277f8860d66c
+base.1=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_98c3ef1abf3c39bdd1ead2d29640cbf12b553f25
+base.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.1.0_2419d657780799249e2515b7eb71ab7a35cb928d
+file.6=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_055ecd70fc7136cc18d213fd1a94c566cd77ea8b/classes.dex
+file.5=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.1.0_f497afc5c202c1c94718a00e83cca233b80ce963/classes.dex
+file.4=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8c62008881317a243fc8447681d6baadae07a2a8/classes.dex
+file.3=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5cda84118e360f4637f4eb6ca92565a65adc9123/classes.dex
+file.2=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_52d700497c34ff216f9d0eadc5c4277f8860d66c/classes.dex
+file.1=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_98c3ef1abf3c39bdd1ead2d29640cbf12b553f25/classes.dex
+file.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.1.0_2419d657780799249e2515b7eb71ab7a35cb928d/classes.dex
