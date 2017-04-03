@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         BACKGROUND_COLORS.put(Color.ICY_MARSHMALLOW, android.graphics.Color.rgb(109, 170, 199));
         BACKGROUND_COLORS.put(Color.BLUEBERRY_PIE, android.graphics.Color.rgb(98, 84, 158));
         BACKGROUND_COLORS.put(Color.MINT_COCKTAIL, android.graphics.Color.rgb(155, 186, 160));
+        BACKGROUND_COLORS.put(Color.LEMON_TART, android.graphics.Color.rgb(204, 204, 0));
+        BACKGROUND_COLORS.put(Color.SWEET_BEETROOT, android.graphics.Color.rgb(153, 0, 76));
+        BACKGROUND_COLORS.put(Color.CANDY_FLOSS, android.graphics.Color.rgb(255, 204, 229));
     }
 
     private static final int BACKGROUND_COLOR_NEUTRAL = android.graphics.Color.rgb(160, 169, 172);
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         proximityContentManager = new ProximityContentManager(this,
                 Arrays.asList(
-                        new BeaconID("B9407F30-F5F8-466E-AFF9-25556B57FE6D", 58817, 25765)),
+                        new BeaconID(this.getText(R.string.beacon_id2).toString(),
+                                getApplicationContext().getResources().getInteger(R.integer.beacon_id2_major),
+                                getApplicationContext().getResources().getInteger(R.integer.beacon_id2_minor))),
                 new EstimoteCloudBeaconDetailsFactory());
         proximityContentManager.setListener(new ProximityContentManager.Listener() {
             @Override

@@ -1,4 +1,4 @@
-#Sat Mar 18 18:33:33 EDT 2017
-base.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6
+#Fri Mar 31 21:54:52 EDT 2017
+base.0=C\:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_6
 renamed.0=classes.dex
-file.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex
+file.0=C\:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_6\\classes.dex

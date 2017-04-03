@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+        "outputFile": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 117
                 },
                 "from": {
-                    "file": "/Users/shriyashjalukar/.android/build-cache/4ac3121dbce59705a38994602cc2b2313f0048ea/output/res/values-h720dp/values-h720dp.xml",
+                    "file": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\values-h720dp\\values-h720dp.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

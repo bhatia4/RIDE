@@ -1,7 +1,4 @@
-#Sat Mar 18 18:33:33 EDT 2017
-base.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_293eb6cbdfceb7acd66bd2f90b955027c4b9bb94
-renamed.1=classes2.dex
+#Sat Apr 01 14:24:45 EDT 2017
+base.0=C\:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.1=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ed3449f8724918bc7132e70ff28d8f6dde509cb8/classes.dex
-base.1=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ed3449f8724918bc7132e70ff28d8f6dde509cb8
-file.0=/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_293eb6cbdfceb7acd66bd2f90b955027c4b9bb94/classes.dex
+file.0=C\:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

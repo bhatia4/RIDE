@@ -14,7 +14,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        EstimoteSDK.initialize(getApplicationContext(), "chadgainor-gmail-com-s-pro-a9b", "7298de95cae03985aa3289c9ca08e46c");
+        EstimoteSDK.initialize(getApplicationContext(), getText(R.string.appId2).toString(), getText(R.string.appToken2).toString());
 
         // uncomment to enable debug-level logging
         // it's usually only a good idea when troubleshooting issues with the Estimote SDK

@@ -36,6 +36,7 @@
             </intent-filter>
         </activity>
 
+        <service android:name="com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.RESTfulConsumerService" />
         <service
             android:name="com.estimote.sdk.service.BeaconService"
             android:exported="false" />

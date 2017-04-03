@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">ChadgainorGmailComSProA9B</string>
+    <string name="app_name">NeXt - Prototype - v1</string>
+
+    <!-- Estimote Beacons - Chad's -->
+    <string name="appId1">chadgainor-gmail-com-s-pro-a9b</string>
+    <string name="appToken1">7298de95cae03985aa3289c9ca08e46c</string>
+    <string name="beacon_id1">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
+    <integer name="beacon_id1_major">58817</integer>
+    <integer name="beacon_id1_minor">25765</integer>
+
+    <!-- Estimote Beacons - Kunal's -->
+    <string name="appId2">kunal-bhatia78-gmail-com-t-8tz</string>
+    <string name="appToken2">84e4168cf7b6d291a782e6d34d0d1546</string>
+    <string name="beacon_id2">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
+    <integer name="beacon_id2_major">21183</integer>
+    <integer name="beacon_id2_minor">38897</integer>
+    <string name="beacon_id3">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
+    <integer name="beacon_id3_major">42630</integer>
+    <integer name="beacon_id3_minor">12917</integer>
+    <string name="beacon_id4">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
+    <integer name="beacon_id4_major">39559</integer>
+    <integer name="beacon_id4_minor">220</integer>
+
 </resources>

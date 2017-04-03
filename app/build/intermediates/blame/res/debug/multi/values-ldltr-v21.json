@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/shriyashjalukar/Desktop/android-beacon-mint/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+        "outputFile": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 163
                 },
                 "from": {
-                    "file": "/Users/shriyashjalukar/.android/build-cache/4ac3121dbce59705a38994602cc2b2313f0048ea/output/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "file": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
