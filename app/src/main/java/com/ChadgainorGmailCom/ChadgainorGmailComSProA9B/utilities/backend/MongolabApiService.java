@@ -44,4 +44,19 @@ public interface MongolabApiService {
      */
     @PUT("accounts/{oid}")
     Call<Account> updateAccount(@Path("oid") String oid, @Body Account updatedAccount, @Query("apiKey") String apiKey);
+
+    /*
+        Get list of active beacons:
+        https://api.mongolab.com/api/1/databases/swdetsi2017/collections/beacons?q={%22active%22:true}&apiKey=VxUDzy-whQi2yALDCd4PXD9WvNWgOLga
+     */
+    @GET("beacons?q={\"active\":true}")
+    Call<List<Beacon>> getListOfActiveBeacons(@Query("apiKey") String apiKey);
+
+
+    /*
+        Get Beacon by its estimote beacon IDs:
+        https://api.mongolab.com/api/1/databases/swdetsi2017/collections/beacons?q={%22estimote_beacon_id%22:{%22proximity_uuid%22%20:%20%22B9407F30-F5F8-466E-AFF9-25556B57FE6D%22%20,%20%22major%22%20:%20%2221183%22%20,%20%22minor%22%20:%20%2238897%22}}&apiKey=VxUDzy-whQi2yALDCd4PXD9WvNWgOLga
+     */
+    @GET("beacons")
+    Call<List<Beacon>> getBeaconByID(@Query("q") String q, @Query("apiKey") String apiKey);
 }

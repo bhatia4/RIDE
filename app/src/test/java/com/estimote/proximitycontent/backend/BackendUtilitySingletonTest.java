@@ -2,6 +2,7 @@ package com.estimote.proximitycontent.backend;
 
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.BackendUtilitySingleton;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Account;
+import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Beacon;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.MonglabApiServiceCallException;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Transaction;
 
@@ -34,7 +35,7 @@ public class BackendUtilitySingletonTest {
     @Test
     public void testGetListOfAccounts() {
         try {
-            List<Account> accountList = instance.getListOfAccounts("58cdcfef734d1d2ca858081e");
+            List<Account> accountList = instance.getListOfAccounts();
             Assert.assertNotEquals(0, accountList.size());
         } catch (IOException ioe) {
             throw new MonglabApiServiceCallException("JUnit test testGetListOfAccounts() failed", ioe);
@@ -54,13 +55,14 @@ public class BackendUtilitySingletonTest {
 
     @Test
     public void testAddTransactionToAccount() {
-        Transaction inputTransaction = new Transaction("XYZ", new Date(), 50.01, 49.00143, 56.0004);
+        Transaction inputTransaction = new Transaction("XYZ", new Date(), 50.01, 49.00143, 56.0004, "58e399de734d1d0e665f044b");
         Assert.assertNull(inputTransaction.getTransactionID());
         try {
-            Transaction outpotTransaction = instance.addTransactionToAccount(inputTransaction);
-            Assert.assertNotNull(outpotTransaction.getTransactionID());
-            Assert.assertNotNull(outpotTransaction.getTransactionID().getOid());
-            Assert.assertNotEquals(0, outpotTransaction.getTransactionID().getOid().length());
+            Transaction outputTransaction = instance.addTransactionToAccount(inputTransaction);
+            Assert.assertNotNull(outputTransaction);
+            Assert.assertNotNull(outputTransaction.getTransactionID());
+            Assert.assertNotNull(outputTransaction.getTransactionID().getOid());
+            Assert.assertNotEquals(0, outputTransaction.getTransactionID().getOid().length());
         } catch (IOException ioe) {
             throw new MonglabApiServiceCallException("JUnit test testAddTransactionToAccount() failed", ioe);
         }
@@ -82,6 +84,39 @@ public class BackendUtilitySingletonTest {
         throw new MonglabApiServiceCallException("JUnit test testUpdateBalanceForAccount() failed", ioe);
         } catch (CloneNotSupportedException cnse) {
             throw new MonglabApiServiceCallException("JUnit test testUpdateBalanceForAccount() failed", cnse);
+        }
+    }
+
+    @Test
+    public void testGetListOfActiveBeacons()
+    {
+        try {
+            List<Beacon> beaconsList = instance.getListOfActiveBeacons();
+
+            Assert.assertNotEquals(0, beaconsList.size());
+
+            for (Beacon beacon: beaconsList) {
+                Assert.assertTrue(beacon.isActive());
+            }
+        } catch (IOException ioe) {
+            throw new MonglabApiServiceCallException("JUnit test testGetListOfActiveBeacons() failed", ioe);
+        }
+    }
+
+    @Test
+    public void testGetBeaconByID() {
+        try {
+            Beacon inputBeacon = new Beacon();
+            Beacon.EstimoteBeaconID estimoteBeaconID = inputBeacon.new EstimoteBeaconID("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "21183", "38897");
+            Beacon outputBeacon = instance.getBeaconByID(estimoteBeaconID);
+            Assert.assertNotNull(outputBeacon);
+            Assert.assertNotNull(outputBeacon.getBeaconID());
+            Assert.assertNotNull(outputBeacon.getBeaconID().getOid());
+            Assert.assertEquals(estimoteBeaconID, outputBeacon.getEstimoteBeaconID());
+        } catch (IOException ioe) {
+            throw new MonglabApiServiceCallException("JUnit test testGetBeaconByID() failed", ioe);
+        }  catch (ArrayIndexOutOfBoundsException aioe) {
+            throw new MonglabApiServiceCallException("JUnit test testGetBeaconByID() failed", aioe);
         }
     }
 }

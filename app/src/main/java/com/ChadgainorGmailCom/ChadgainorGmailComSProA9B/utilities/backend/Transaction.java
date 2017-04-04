@@ -9,24 +9,26 @@ import java.util.Date;
  */
 
 public class Transaction {
-    @SerializedName("_id") private TransactonID transactionID;
+    @SerializedName("_id") private DataID transactionID;
     @SerializedName("account_id") private String accountID;
     @SerializedName("date_and_time") private Date dateAndTime;
     @SerializedName("amt_charged") private double amtCharged;
     @SerializedName("gps_long") private double gpsLongitude;
     @SerializedName("gps_lat") private double gpsLatitude;
+    @SerializedName("beacon_id") private String beaconId;
 
     public Transaction() { /*no-args constructor*/ }
-    public Transaction(String accountID, Date dateAndTime, double amtCharged, double gpsLongitude, double gpsLatitude) {
+    public Transaction(String accountID, Date dateAndTime, double amtCharged, double gpsLongitude, double gpsLatitude, String beaconId) {
         //constructor uses all fields accept transactionID
         this.accountID = accountID;
         this.dateAndTime = dateAndTime;
         this.amtCharged = amtCharged;
         this.gpsLongitude = gpsLongitude;
         this.gpsLatitude = gpsLatitude;
+        this.beaconId = beaconId;
     }
 
-    public TransactonID getTransactionID() {
+    public DataID getTransactionID() {
         return transactionID;
     }
 
@@ -50,13 +52,7 @@ public class Transaction {
         return gpsLatitude;
     }
 
-    public class TransactonID
-    {
-        @SerializedName("$oid") private String oid;
-        public TransactonID() { /*no-args constructor*/ }
-
-        public String getOid() {
-            return oid;
-        }
+    public String getBeaconId() {
+        return beaconId;
     }
 }

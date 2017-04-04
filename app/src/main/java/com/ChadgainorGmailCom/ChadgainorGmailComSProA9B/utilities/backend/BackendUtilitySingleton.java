@@ -28,7 +28,7 @@ public class BackendUtilitySingleton {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private MongolabApiService service = retrofit.create(MongolabApiService.class);
-    public List<Account> getListOfAccounts(String accountID) throws IOException
+    public List<Account> getListOfAccounts() throws IOException
     {
         return service.getListOfAccounts(API_KEY).execute().body();
     }
@@ -48,5 +48,13 @@ public class BackendUtilitySingleton {
         newAccount.setBalance(newBalance);
 
         return service.updateAccount(originalAccount.getAccountID().getOid(), newAccount, API_KEY).execute().body();
+    }
+
+    public List<Beacon> getListOfActiveBeacons() throws IOException {
+        return service.getListOfActiveBeacons(API_KEY).execute().body();
+    }
+
+    public Beacon getBeaconByID(Beacon.EstimoteBeaconID estimoteBeaconID) throws IOException, ArrayIndexOutOfBoundsException {
+        return service.getBeaconByID(estimoteBeaconID.toString(), API_KEY).execute().body().get(0);
     }
 }

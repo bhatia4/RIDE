@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Account implements Cloneable {
-    @SerializedName("_id") private AccountID accountID;
+    @SerializedName("_id") private DataID accountID;
     private String name;
     private String address;
     private String phone;
@@ -20,7 +20,7 @@ public class Account implements Cloneable {
 
     public Account() { /*no-args constructor*/ }
     public Account(String oid, String name, String address, String phone, String age, Character gender, String race, double balance, String avgTravelTime, String avgTravelFreq) {
-        this.accountID = new AccountID(oid);
+        this.accountID = new DataID(oid);
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -37,7 +37,7 @@ public class Account implements Cloneable {
         return super.clone();
     }
 
-    public AccountID getAccountID() {
+    public DataID getAccountID() {
         return accountID;
     }
 
@@ -78,19 +78,5 @@ public class Account implements Cloneable {
 
     public String getAvgTravelFreq() {
         return avgTravelFreq;
-    }
-
-
-    public class AccountID
-    {
-        @SerializedName("$oid") private String oid;
-        public AccountID() { /*no-args constructor*/ }
-        public AccountID(String oid) {
-            this.oid = oid;
-        }
-
-        public String getOid() {
-            return oid;
-        }
     }
 }
