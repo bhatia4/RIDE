@@ -248,12 +248,6 @@
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="beacon_id1_major">58817</integer>
     <integer name="beacon_id1_minor">25765</integer>
-    <integer name="beacon_id2_major">21183</integer>
-    <integer name="beacon_id2_minor">38897</integer>
-    <integer name="beacon_id3_major">42630</integer>
-    <integer name="beacon_id3_minor">12917</integer>
-    <integer name="beacon_id4_major">39559</integer>
-    <integer name="beacon_id4_minor">220</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
@@ -283,12 +277,14 @@
     <string name="app_name">NeXt - Prototype - v1</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="beacon_id1">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <string name="beacon_id2">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <string name="beacon_id3">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <string name="beacon_id4">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
+    <string name="default_account_id">58cdd126734d1d2ca858083c</string>
     <string name="error_no_bluetooth_enabled">To use this app you need to turn on Bluetooth</string>
     <string name="error_no_location_permission">To use this app you need to grant location permission</string>
+    <string name="label_account_name">Account Name:</string>
+    <string name="label_balance">Balance: $</string>
+    <string name="label_charge_transaction_button">Charge $</string>
+    <string name="label_last_charge">Last Charge $</string>
     <string name="requesting_location_access">Requesting location access</string>
     <string name="requesting_location_access_cancel">I don\'t want to do this now</string>
     <string name="requesting_location_access_ok">Go to settings to enable</string>

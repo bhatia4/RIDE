@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NeXt - Prototype - v1</string>
+    <string name="default_account_id">58cdd126734d1d2ca858083c</string>
 
     <!-- Estimote Beacons - Chad's -->
     <string name="appId1">chadgainor-gmail-com-s-pro-a9b</string>
@@ -11,14 +12,10 @@
     <!-- Estimote Beacons - Kunal's -->
     <string name="appId2">kunal-bhatia78-gmail-com-t-8tz</string>
     <string name="appToken2">84e4168cf7b6d291a782e6d34d0d1546</string>
-    <string name="beacon_id2">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <integer name="beacon_id2_major">21183</integer>
-    <integer name="beacon_id2_minor">38897</integer>
-    <string name="beacon_id3">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <integer name="beacon_id3_major">42630</integer>
-    <integer name="beacon_id3_minor">12917</integer>
-    <string name="beacon_id4">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
-    <integer name="beacon_id4_major">39559</integer>
-    <integer name="beacon_id4_minor">220</integer>
 
+    <!-- UI text -->
+    <string name="label_balance">Balance: $</string>
+    <string name="label_account_name">Account Name:</string>
+    <string name="label_last_charge">Last Charge $</string>
+    <string name="label_charge_transaction_button">Charge $</string>
 </resources>
