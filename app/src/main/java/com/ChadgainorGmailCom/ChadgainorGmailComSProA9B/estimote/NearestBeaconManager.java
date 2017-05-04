@@ -76,7 +76,7 @@ public class NearestBeaconManager {
         }
     }
 
-    private void updateNearestBeacon(BeaconID beaconID) {
+    public void updateNearestBeacon(BeaconID beaconID) {
         currentlyNearestBeaconID = beaconID;
         firstEventSent = true;
         if (listener != null) {
@@ -109,5 +109,9 @@ public class NearestBeaconManager {
 
         Log.d(TAG, "Nearest beacon: " + nearestBeacon + ", distance: " + nearestBeaconsDistance);
         return nearestBeacon;
+    }
+
+    public BeaconManager getBeaconManager() {
+        return beaconManager;
     }
 }

@@ -57,4 +57,8 @@ public class ProximityContentManager {
     public void destroy() {
         nearestBeaconManager.destroy();
     }
+
+    public NearestBeaconManager getNearestBeaconManager() {
+        return nearestBeaconManager;
+    }
 }

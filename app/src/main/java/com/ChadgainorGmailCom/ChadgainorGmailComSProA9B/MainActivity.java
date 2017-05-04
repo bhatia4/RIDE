@@ -1,10 +1,15 @@
 package com.ChadgainorGmailCom.ChadgainorGmailComSProA9B;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.BeaconID;
@@ -21,6 +26,7 @@ import com.estimote.sdk.cloud.model.Color;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,45 +41,30 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-
-    private static final Map<Color, Integer> BACKGROUND_COLORS = new HashMap<>();
-
-    static {
-        BACKGROUND_COLORS.put(Color.ICY_MARSHMALLOW, android.graphics.Color.rgb(109, 170, 199));
-        BACKGROUND_COLORS.put(Color.BLUEBERRY_PIE, android.graphics.Color.rgb(98, 84, 158));
-        BACKGROUND_COLORS.put(Color.MINT_COCKTAIL, android.graphics.Color.rgb(155, 186, 160));
-        BACKGROUND_COLORS.put(Color.LEMON_TART, android.graphics.Color.rgb(204, 204, 0));
-        BACKGROUND_COLORS.put(Color.SWEET_BEETROOT, android.graphics.Color.rgb(153, 0, 76));
-        BACKGROUND_COLORS.put(Color.CANDY_FLOSS, android.graphics.Color.rgb(255, 204, 229));
-    }
-
-    private static final int BACKGROUND_COLOR_NEUTRAL = android.graphics.Color.rgb(160, 169, 172);
+    private static final int BACKGROUND_COLOR_BLACK = android.graphics.Color.rgb(0, 0, 0);
+    private static final int BACKGROUND_COLOR_ORANGE = android.graphics.Color.rgb(255, 78, 0);
 
     private ProximityContentManager proximityContentManager;
+    private Handler mHandler = new Handler();
+    private boolean continueCharging = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount());
+        updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount(), null);
 
-        final Button button = (Button) findViewById(R.id.button);
+        final ImageButton button = (ImageButton) findViewById(R.id.imageViewButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO: add GPS & beaconID
-                Transaction transc = new Transaction(((MyApplication) MainActivity.this.getApplication()).getUserAccount().getAccountID().getOid(), new Date(),
-                                                    ((MyApplication) MainActivity.this.getApplication()).getRandomDbl(), 0.0d, 0.0d, null);
-                new UpdateAccountAsyncTask() {
-                    @Override
-                    protected void onPostExecute(Account updatedAccount) {
-                        ((MyApplication) MainActivity.this.getApplication()).setUserAccount(updatedAccount);
-                        updateInfoTextViews(((MyApplication) MainActivity.this.getApplication()).getUserAccount());
+                continueCharging = !continueCharging;
 
-                        ((TextView) findViewById(R.id.lastChargeTextView)).setText(getText(R.string.label_last_charge).toString() + new DecimalFormat("#0.00").format(((MyApplication) MainActivity.this.getApplication()).getRandomDbl()));
-                    }
-                }.execute(transc);
-
-                showHideTransactionButton(false);
+                if (continueCharging) {
+                    setTitle(getText(R.string.app_name));
+                    proximityContentManager.getNearestBeaconManager().updateNearestBeacon(null);
+                }
+                else
+                    setTitle(getTitle()+" - disabled");
             }
         });
 
@@ -89,29 +80,25 @@ public class MainActivity extends AppCompatActivity {
                         Integer.parseInt(currBeacon.getEstimoteBeaconID().getMinor()));
             }
 
+            final BeaconTrackingRunnable runnable = new BeaconTrackingRunnable(listOfActiveBeaconsFromBackend);
             proximityContentManager = new ProximityContentManager(this, Arrays.asList(beaconsToScan),
                     new EstimoteCloudBeaconDetailsFactory());
+            proximityContentManager.getNearestBeaconManager().getBeaconManager().setForegroundScanPeriod(750, 6000);
+
             proximityContentManager.setListener(new ProximityContentManager.Listener() {
                 @Override
-                public void onContentChanged(Object content) {
-                    String text;
-                    Integer backgroundColor;
-                    if (content != null) {
-                        EstimoteCloudBeaconDetails beaconDetails = (EstimoteCloudBeaconDetails) content;
-                        text = "You're in " + beaconDetails.getBeaconName() + "'s range!";
-                        backgroundColor = BACKGROUND_COLORS.get(beaconDetails.getBeaconColor());
+                public void onContentChanged(final Object content) {
+                    if (content != null && continueCharging) {
+                        runnable.setBeaconContent((EstimoteCloudBeaconDetails) content);
 
-                        if (backgroundColor == BACKGROUND_COLORS.get(Color.LEMON_TART))
-                            showHideTransactionButton(true);
-                        else
-                            showHideTransactionButton(false);
-                    } else {
-                        text = "No beacons in range.";
-                        backgroundColor = null;
+                        findViewById(R.id.relativeLayout).setBackgroundColor(BACKGROUND_COLOR_ORANGE);
+                        findViewById(R.id.imageViewButton).setVisibility(View.GONE);
+                        findViewById(R.id.imageViewAlt).setVisibility(View.VISIBLE);
+
+                        mHandler.removeCallbacksAndMessages(null);
+                        mHandler.postDelayed(runnable, 1250);
+                        proximityContentManager.getNearestBeaconManager().updateNearestBeacon(null);
                     }
-                    ((TextView) findViewById(R.id.textView)).setText(text);
-                    findViewById(R.id.relativeLayout).setBackgroundColor(
-                            backgroundColor != null ? backgroundColor : BACKGROUND_COLOR_NEUTRAL);
                 }
             });
         } catch (InterruptedException e) {
@@ -133,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Starting ProximityContentManager content updates");
             proximityContentManager.startContentUpdates();
         }
-        updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount());
+        updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount(), null);
     }
 
     @Override
@@ -149,27 +136,73 @@ public class MainActivity extends AppCompatActivity {
         proximityContentManager.destroy();
     }
 
-    private void updateInfoTextViews(Account account)
+    private void updateInfoTextViews(Account account, String charge)
     {
         if (account!=null) {
-            ((TextView) findViewById(R.id.textViewAccountName)).setText(getText(R.string.label_account_name).toString() + " " + account.getName());
             ((TextView) findViewById(R.id.textViewAccountBalance)).setText(getText(R.string.label_balance).toString() + " " + new DecimalFormat("#0.00").format(account.getBalance()));
+        }
+
+        if (charge!=null) {
+            ((TextView) findViewById(R.id.lastChargeTextView)).setText(getText(R.string.label_last_charge).toString() + " -" + charge );
         }
     }
 
+    private class BeaconTrackingRunnable implements Runnable
+    {
+        private List<Beacon> listOfActiveBeaconsFromBackend;
+        private EstimoteCloudBeaconDetails beaconContent;
 
-    private void showHideTransactionButton(boolean visible) {
-        Button chargeButton = (Button)findViewById(R.id.button);
-        if (visible) {
-            //random charge amount between $1 & $10
-            ((MyApplication) this.getApplication()).setRandomDbl(new Random().nextDouble() * 10);
-
-            chargeButton.setText(getText(R.string.label_charge_transaction_button).toString() + new DecimalFormat("#0.00").format(((MyApplication) this.getApplication()).getRandomDbl()));
-            chargeButton.setVisibility(View.VISIBLE);
+        public BeaconTrackingRunnable(List<Beacon> listOfActiveBeaconsFromBackend) {
+            this.listOfActiveBeaconsFromBackend = listOfActiveBeaconsFromBackend;
         }
-        else
-        {
-            chargeButton.setVisibility(View.INVISIBLE);
+
+        public void run() {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+
+            BeaconID beaconDetails = ((EstimoteCloudBeaconDetails) beaconContent).getBeaconID();
+            String currbeaconID = null;
+            for (Beacon currBeacon: listOfActiveBeaconsFromBackend)
+            {
+                if ( currBeacon.getEstimoteBeaconID().equals(new Beacon().new EstimoteBeaconID(beaconDetails.getProximityUUID().toString().toUpperCase(), String.valueOf(beaconDetails.getMajor()), String.valueOf((beaconDetails.getMinor())))) )
+                {
+                    currbeaconID = currBeacon.getBeaconID().getOid();
+                    break;
+                }
+            }
+
+            //random charge amount between $1 & $10
+            ((MyApplication) getApplication()).setRandomDbl(new Random().nextDouble() * 10);
+
+            GPSTracker gps = new GPSTracker(MainActivity.this);
+            double gpsLat = 0.0d;
+            double gpsLong = 0.0d;
+            if (gps.canGetLocation())
+            {
+                gpsLat = gps.getLatitude();
+                gpsLong = gps.getLongitude();
+            }
+
+            Transaction transc = new Transaction(((MyApplication) MainActivity.this.getApplication()).getUserAccount().getAccountID().getOid(), new Date(),
+                    ((MyApplication) MainActivity.this.getApplication()).getRandomDbl(), gpsLat, gpsLong, currbeaconID);
+            new UpdateAccountAsyncTask() {
+                @Override
+                protected void onPostExecute(Account updatedAccount) {
+                    ((MyApplication) MainActivity.this.getApplication()).setUserAccount(updatedAccount);
+                    updateInfoTextViews(((MyApplication) MainActivity.this.getApplication()).getUserAccount(),
+                            new DecimalFormat("#0.00").format(((MyApplication) MainActivity.this.getApplication()).getRandomDbl()));
+                }
+            }.execute(transc);
+
+            findViewById(R.id.relativeLayout).setBackgroundColor(BACKGROUND_COLOR_BLACK);
+            findViewById(R.id.imageViewAlt).setVisibility(View.GONE);
+            findViewById(R.id.imageViewButton).setVisibility(View.VISIBLE);
+        }
+
+
+        public void setBeaconContent(EstimoteCloudBeaconDetails beaconContent) {
+            this.beaconContent = beaconContent;
         }
     }
 }

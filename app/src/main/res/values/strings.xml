@@ -14,8 +14,8 @@
     <string name="appToken2">84e4168cf7b6d291a782e6d34d0d1546</string>
 
     <!-- UI text -->
-    <string name="label_balance">Balance: $</string>
+    <string name="label_balance">$</string>
     <string name="label_account_name">Account Name:</string>
-    <string name="label_last_charge">Last Charge $</string>
+    <string name="label_last_charge">$</string>
     <string name="label_charge_transaction_button">Charge $</string>
 </resources>

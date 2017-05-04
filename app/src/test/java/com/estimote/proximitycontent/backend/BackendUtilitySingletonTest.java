@@ -52,7 +52,6 @@ public class BackendUtilitySingletonTest {
         }
     }
 
-
     @Test
     public void testAddTransactionToAccount() {
         Transaction inputTransaction = new Transaction("XYZ", new Date(), 50.01, 49.00143, 56.0004, "58e399de734d1d0e665f044b");
@@ -74,7 +73,7 @@ public class BackendUtilitySingletonTest {
         double newBalance = 555.55;
         String accountOID = "58cdcfef734d1d2ca858081e";
         Account testAccount = new Account(accountOID, "Kat's phone" , "333 kats way, Detroit, MI 48000" ,
-                                                                "(313) 817-6714" , "16 ", 'F' , "african american" , 100 , "2 hrs" , "2 times / week");
+                                                                "13138176714" , "16 ", 'F' , "african american" , 100 , "2 hrs" , "2 times / week");
         Assert.assertNotEquals(newBalance, testAccount.getBalance());
         try {
             Account updatedAccount = instance.updateBalanceForAccount(testAccount, newBalance);

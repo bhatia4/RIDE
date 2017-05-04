@@ -96,6 +96,10 @@
         "source": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
+        "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\beacon_alt.png",
+        "source": "C:\\Users\\bhatia\\git\\RIDE\\app\\src\\main\\res\\drawable\\beacon_alt.png"
+    },
+    {
         "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
         "source": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\drawable\\abc_dialog_material_background_dark.xml"
     },
