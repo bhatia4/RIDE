@@ -59,4 +59,11 @@ public interface MongolabApiService {
      */
     @GET("beacons")
     Call<List<Beacon>> getBeaconByID(@Query("q") String q, @Query("apiKey") String apiKey);
+
+    /*
+        Get configuration and settings
+        https://api.mongolab.com/api/1/databases/swdetsi2017/collections/configurations/?apiKey=VxUDzy-whQi2yALDCd4PXD9WvNWgOLga
+    */
+    @GET("configurations")
+    Call<List<ConfigurationsAndSettings>> getConfigurations(@Query("apiKey") String apiKey);
 }

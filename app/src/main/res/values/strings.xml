@@ -18,4 +18,6 @@
     <string name="label_account_name">Account Name:</string>
     <string name="label_last_charge">$</string>
     <string name="label_charge_transaction_button">Charge $</string>
+    <integer name="charge_value">1</integer>
+    <integer name="charge_every_interval_in_secs">6</integer>
 </resources>
