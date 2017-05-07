@@ -88,16 +88,16 @@
         "source": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
+        "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\beacon_alt.png",
+        "source": "C:\\Users\\bhatia\\git\\RIDE\\app\\src\\main\\res\\drawable\\beacon_alt.png"
+    },
+    {
         "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_fab_background.xml",
         "source": "C:\\Users\\bhatia\\.android\\build-cache\\c6d26e26b4d864978d084f325c042fe798f5f8bf\\output\\res\\drawable\\design_fab_background.xml"
     },
     {
         "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
         "source": "C:\\Users\\bhatia\\.android\\build-cache\\df3fa53b70cf8065aa1a3724090d6e468b675304\\output\\res\\drawable\\abc_cab_background_top_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\beacon_alt.png",
-        "source": "C:\\Users\\bhatia\\git\\RIDE\\app\\src\\main\\res\\drawable\\beacon_alt.png"
     },
     {
         "merged": "C:\\Users\\bhatia\\git\\RIDE\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",

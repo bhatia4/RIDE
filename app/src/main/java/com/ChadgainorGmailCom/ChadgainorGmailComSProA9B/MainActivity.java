@@ -1,5 +1,6 @@
 package com.ChadgainorGmailCom.ChadgainorGmailComSProA9B;
 
+import android.graphics.Typeface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -8,10 +9,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.BeaconID;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.EstimoteCloudBeaconDetails;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.EstimoteCloudBeaconDetailsFactory;
@@ -22,21 +21,12 @@ import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetAct
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Transaction;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.UpdateAccountAsyncTask;
 import com.estimote.sdk.SystemRequirementsChecker;
-import com.estimote.sdk.cloud.model.Color;
-
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
-
-//
-// Running into any issues? Drop us an email to: contact@estimote.com
-//
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Typeface type = Typeface.createFromAsset(this.getAssets(),"fonts/Loomis_Sans.ttf");
+        ((TextView) findViewById(R.id.textViewAccountBalance)).setTypeface(type);
+        ((TextView) findViewById(R.id.lastChargeTextView)).setTypeface(type);
+
         updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount(), null);
 
         final ImageButton button = (ImageButton) findViewById(R.id.imageViewButton);
@@ -83,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             final BeaconTrackingRunnable runnable = new BeaconTrackingRunnable(listOfActiveBeaconsFromBackend);
             proximityContentManager = new ProximityContentManager(this, Arrays.asList(beaconsToScan),
                     new EstimoteCloudBeaconDetailsFactory());
-            proximityContentManager.getNearestBeaconManager().getBeaconManager().setForegroundScanPeriod(750, 6000);
+            proximityContentManager.getNearestBeaconManager().getBeaconManager().setForegroundScanPeriod(750, ((MyApplication) this.getApplication()).getChargeEveryIntervalInMSecs());
 
             proximityContentManager.setListener(new ProximityContentManager.Listener() {
                 @Override
@@ -139,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateInfoTextViews(Account account, String charge)
     {
         if (account!=null) {
-            ((TextView) findViewById(R.id.textViewAccountBalance)).setText(getText(R.string.label_balance).toString() + " " + new DecimalFormat("#0.00").format(account.getBalance()));
+            ((TextView) findViewById(R.id.textViewAccountBalance)).setText(getText(R.string.label_balance).toString() + " " + new DecimalFormat("#0").format(account.getBalance()));
         }
 
         if (charge!=null) {
@@ -172,9 +167,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            //random charge amount between $1 & $10
-            ((MyApplication) getApplication()).setRandomDbl(new Random().nextDouble() * 10);
-
             GPSTracker gps = new GPSTracker(MainActivity.this);
             double gpsLat = 0.0d;
             double gpsLong = 0.0d;
@@ -185,13 +177,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Transaction transc = new Transaction(((MyApplication) MainActivity.this.getApplication()).getUserAccount().getAccountID().getOid(), new Date(),
-                    ((MyApplication) MainActivity.this.getApplication()).getRandomDbl(), gpsLat, gpsLong, currbeaconID);
+                    ((MyApplication) MainActivity.this.getApplication()).getChargeValue(), gpsLat, gpsLong, currbeaconID);
             new UpdateAccountAsyncTask() {
                 @Override
                 protected void onPostExecute(Account updatedAccount) {
                     ((MyApplication) MainActivity.this.getApplication()).setUserAccount(updatedAccount);
                     updateInfoTextViews(((MyApplication) MainActivity.this.getApplication()).getUserAccount(),
-                            new DecimalFormat("#0.00").format(((MyApplication) MainActivity.this.getApplication()).getRandomDbl()));
+                            new DecimalFormat("#0").format(((MyApplication) MainActivity.this.getApplication()).getChargeValue()));
                 }
             }.execute(transc);
 

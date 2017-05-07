@@ -48,7 +48,7 @@
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ff4e00"
-                android:textSize="36sp" />
+                android:textSize="42sp" />
 
             <TextView
                 android:id="@+id/textViewAccountBalance"
@@ -58,7 +58,7 @@
                 android:paddingTop="10dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ff4e00"
-                android:textSize="36sp" />
+                android:textSize="42sp" />
         </GridLayout>
     </RelativeLayout>
 

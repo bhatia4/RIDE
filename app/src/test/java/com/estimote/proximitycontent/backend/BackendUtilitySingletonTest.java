@@ -3,6 +3,7 @@ package com.estimote.proximitycontent.backend;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.BackendUtilitySingleton;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Account;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Beacon;
+import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.ConfigurationsAndSettings;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.MonglabApiServiceCallException;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Transaction;
 
@@ -116,6 +117,18 @@ public class BackendUtilitySingletonTest {
             throw new MonglabApiServiceCallException("JUnit test testGetBeaconByID() failed", ioe);
         }  catch (ArrayIndexOutOfBoundsException aioe) {
             throw new MonglabApiServiceCallException("JUnit test testGetBeaconByID() failed", aioe);
+        }
+    }
+
+    @Test
+    public void testGetConfigurations() {
+        try {
+            ConfigurationsAndSettings config = instance.getConfigurations();
+            Assert.assertNotNull(config);
+            Assert.assertNotNull(config.getChargeValue());
+            Assert.assertNotNull(config.getChargeEveryIntervalInSecs());
+        } catch (IOException ioe) {
+            throw new MonglabApiServiceCallException("JUnit test testGetConfigurations() failed", ioe);
         }
     }
 }

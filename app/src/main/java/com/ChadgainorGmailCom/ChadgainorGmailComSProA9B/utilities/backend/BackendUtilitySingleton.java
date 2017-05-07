@@ -57,4 +57,9 @@ public class BackendUtilitySingleton {
     public Beacon getBeaconByID(Beacon.EstimoteBeaconID estimoteBeaconID) throws IOException, ArrayIndexOutOfBoundsException {
         return service.getBeaconByID(estimoteBeaconID.toString(), API_KEY).execute().body().get(0);
     }
+
+    public ConfigurationsAndSettings getConfigurations() throws IOException
+    {
+        return service.getConfigurations(API_KEY).execute().body().get(0);
+    }
 }
