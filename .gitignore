@@ -51,6 +51,7 @@ Thumbs.db
 *.iml
 /captures
 .externalNativeBuild
+reports/
 
 #NDK
 obj/
