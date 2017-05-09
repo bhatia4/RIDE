@@ -49,7 +49,7 @@ public class MyApplication extends Application {
                 setChargeEveryIntervalInMSecs(config.getChargeEveryIntervalInSecs());
             }
 
-            String phoneNumber = ((TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+            String phoneNumber = null;
             String accountID = getText(R.string.default_account_id).toString();
 
             if (phoneNumber!=null && phoneNumber.trim().length()>0)

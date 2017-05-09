@@ -1,12 +1,18 @@
 package com.ChadgainorGmailCom.ChadgainorGmailComSProA9B;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,7 +23,9 @@ import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.EstimoteCloudBe
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.estimote.ProximityContentManager;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Account;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Beacon;
+import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetAccountDetailsAsyncTask;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetActiveBeaconsListAsyncTask;
+import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetListOfAccountsAsyncTask;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Transaction;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.UpdateAccountAsyncTask;
 import com.estimote.sdk.SystemRequirementsChecker;
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int BACKGROUND_COLOR_BLACK = android.graphics.Color.rgb(0, 0, 0);
     private static final int BACKGROUND_COLOR_ORANGE = android.graphics.Color.rgb(255, 78, 0);
+    private static final int PERMISSION_READ_STATE = 1;
 
     private ProximityContentManager proximityContentManager;
     private Handler mHandler = new Handler();
@@ -42,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // We do not have this permission. Let's ask the user
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSION_READ_STATE);
+        }
 
         Typeface type = Typeface.createFromAsset(this.getAssets(),"fonts/Loomis_Sans.ttf");
         ((TextView) findViewById(R.id.textViewAccountBalance)).setTypeface(type);
@@ -139,6 +154,43 @@ public class MainActivity extends AppCompatActivity {
 
         if (charge!=null) {
             ((TextView) findViewById(R.id.lastChargeTextView)).setText(getText(R.string.label_last_charge).toString() + " -" + charge );
+        }
+    }
+
+    //override onRequestPermissionsResult in your activity and see if the permission was granted. If it was, you can go ahead and preform the dangerous action.
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_READ_STATE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted!
+
+                    try {
+                        String phoneNumber = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+                        if (phoneNumber != null && phoneNumber.trim().length() > 0) {
+                            phoneNumber = phoneNumber.trim();
+                            List<Account> listOfAccounts = new GetListOfAccountsAsyncTask().execute().get();
+                            for (Account currAccount : listOfAccounts) {
+                                if (currAccount.getPhone().equals(phoneNumber)) {
+                                    String accountID = currAccount.getAccountID().getOid();
+                                    ((MyApplication) MainActivity.this.getApplication()).setUserAccount(new GetAccountDetailsAsyncTask().execute(accountID).get());
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // permission denied
+                }
+                return;
+            }
+
         }
     }
 
