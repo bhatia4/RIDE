@@ -1,15 +1,11 @@
 package com.ChadgainorGmailCom.ChadgainorGmailComSProA9B;
 
 import android.app.Application;
-import android.content.Context;
-import android.telephony.TelephonyManager;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.Account;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.ConfigurationsAndSettings;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetAccountDetailsAsyncTask;
 import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetConfigurationsAsyncTask;
-import com.ChadgainorGmailCom.ChadgainorGmailComSProA9B.utilities.backend.GetListOfAccountsAsyncTask;
 import com.estimote.sdk.EstimoteSDK;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MyApplication extends Application {
@@ -49,22 +45,7 @@ public class MyApplication extends Application {
                 setChargeEveryIntervalInMSecs(config.getChargeEveryIntervalInSecs());
             }
 
-            String phoneNumber = null;
             String accountID = getText(R.string.default_account_id).toString();
-
-            if (phoneNumber!=null && phoneNumber.trim().length()>0)
-            {
-                phoneNumber = phoneNumber.trim();
-                List<Account> listOfAccounts = new GetListOfAccountsAsyncTask().execute().get();
-                for (Account currAccount : listOfAccounts)
-                {
-                    if (currAccount.getPhone().equals(phoneNumber))
-                    {
-                        accountID = currAccount.getAccountID().getOid();
-                        break;
-                    }
-                }
-            }
             setUserAccount(new GetAccountDetailsAsyncTask().execute(accountID).get());
         } catch (InterruptedException e) {
             e.printStackTrace();

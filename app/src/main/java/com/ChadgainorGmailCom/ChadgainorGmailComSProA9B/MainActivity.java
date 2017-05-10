@@ -33,7 +33,6 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             // We do not have this permission. Let's ask the user
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSION_READ_STATE);
         }
+        else
+            acquirePhoneNumber();
 
         Typeface type = Typeface.createFromAsset(this.getAssets(),"fonts/Loomis_Sans.ttf");
         ((TextView) findViewById(R.id.textViewAccountBalance)).setTypeface(type);
@@ -167,30 +168,36 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission granted!
 
-                    try {
-                        String phoneNumber = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
-                        if (phoneNumber != null && phoneNumber.trim().length() > 0) {
-                            phoneNumber = phoneNumber.trim();
-                            List<Account> listOfAccounts = new GetListOfAccountsAsyncTask().execute().get();
-                            for (Account currAccount : listOfAccounts) {
-                                if (currAccount.getPhone().equals(phoneNumber)) {
-                                    String accountID = currAccount.getAccountID().getOid();
-                                    ((MyApplication) MainActivity.this.getApplication()).setUserAccount(new GetAccountDetailsAsyncTask().execute(accountID).get());
-                                    break;
-                                }
-                            }
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                    acquirePhoneNumber();
                 } else {
                     // permission denied
                 }
                 return;
             }
 
+        }
+    }
+
+    private void acquirePhoneNumber() {
+        try {
+            String phoneNumber = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+            if (phoneNumber != null && phoneNumber.trim().length() > 0) {
+                phoneNumber = phoneNumber.trim();
+                List<Account> listOfAccounts = new GetListOfAccountsAsyncTask().execute().get();
+                for (Account currAccount : listOfAccounts) {
+                    if (currAccount.getPhone().equals(phoneNumber)) {
+                        String accountID = currAccount.getAccountID().getOid();
+                        ((MyApplication) MainActivity.this.getApplication()).setUserAccount(new GetAccountDetailsAsyncTask().execute(accountID).get());
+                        updateInfoTextViews(((MyApplication) this.getApplication()).getUserAccount(), null);
+
+                        break;
+                    }
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
